@@ -1,0 +1,1314 @@
+openapi: 3.0.3
+info:
+  title: Visionary
+  description: |-
+    Сервер по обработке фотографий в разных стилях.
+  version: 0.0.1
+tags:
+  - name: auth
+    description: Операции, связанные с авторизацией, регистрацией пользователя
+  - name: user
+    description: Операции, связанные с пользователями
+  - name: processing
+    description: Операции, связанные с обработкой изображения
+  - name: image
+    description: Операции, связанные с изображениями
+  - name: comment
+    description: Операции, связанные с комментариями
+  - name: feed
+    description: Операции, связанные с лентой
+paths:
+  /auth/register:
+    post:
+      tags:
+        - auth
+      summary: Регистрация нового пользователя по никнейму
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+        required: true
+      responses:
+        '200':
+          description: Пользователь успешно зарегистрирован
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '409':
+          description: Пользователь с таким никнеймом уже существует
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: Аутентификация уже существующего пользователя
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+        required: true
+      responses:
+        '200':
+          description: Пользователь успешно зарегистрирован
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Пользователь с такими данными не найден
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /user/{userId}:
+    get:
+      tags:
+        - user
+      summary: Получить данные пользователя
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: id пользователя, аккаунт которого нужно обновить
+          schema:
+            type: integer
+            example: 1
+            minimum: 1
+      responses:
+        '200':
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - {}
+        - jwt-token: []
+    put:
+      tags:
+        - user
+      summary: Обновить данные пользователя
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: id пользователя, аккаунт которого нужно обновить
+          schema:
+            type: integer
+            example: 1
+            minimum: 1
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/UpdateUserRequest"
+      responses:
+        '200':
+          description: Данные успешно обновлены
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '401':
+          description: Пользователь неавторизован
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '403':
+          description: Недостаточно прав
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '409':
+          description: Пользователь с таким никнеймом уже существует
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '415':
+          description: Иконка в неподдерживаемом формате
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - jwt-token: []
+    delete:
+      tags:
+        - user
+      summary: Удалить аккаунт пользователя
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: id пользователя, аккаунт которого нужно удалить
+          schema:
+            type: integer
+            example: 1
+            minimum: 1
+      responses:
+        '200':
+          description: Аккаунт успешно удален
+        '401':
+          description: Пользователь неавторизован
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '403':
+          description: Недостаточно прав
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - jwt-token: []
+  /user/{userId}/followers:
+    get:
+      tags:
+        - user
+      summary: Получить подписчиков пользователя
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: id пользователя, у которого надо получить подписчиков
+          schema:
+            type: integer
+            example: 1
+            minimum: 1
+        - name: size
+          in: query
+          required: true
+          description: Кол-во подписчиков пользователя, которое нужно получить
+          schema:
+            type: integer
+            example: 10
+            minimum: 1
+        - name: page
+          in: query
+          required: true
+          description: Смещение, с которым нужно получить подписчиков (записи от (page - 1) * size + 1 до page * size включительно)
+          schema:
+            type: integer
+            example: 2
+            minimum: 1
+      responses:
+        '200':
+          description: Список подписчиков успешно получен
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsersResponse"
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /user/{userId}/follows:
+    get:
+      tags:
+        - user
+      summary: Получить подписки пользователя
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: id пользователя, у которого надо получить подписки
+          schema:
+            type: integer
+            example: 1
+            minimum: 1
+        - name: size
+          in: query
+          required: true
+          description: Кол-во подписок пользователя, которое нужно получить
+          schema:
+            type: integer
+            example: 10
+            minimum: 1
+        - name: page
+          in: query
+          required: true
+          description: Смещение, с которым нужно получить подписки (записи от (page - 1) * size + 1 до page * size включительно)
+          schema:
+            type: integer
+            example: 2
+            minimum: 1
+      responses:
+        '200':
+          description: Список подписок успешно получен
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsersResponse"
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /user/search:
+    get:
+      tags:
+        - user
+      summary: Найти других пользователей
+      parameters:
+        - name: nickname
+          in: query
+          required: true
+          description: Никнейм, по которому искать
+          schema:
+            type: string
+            example: "admin"
+        - name: size
+          in: query
+          required: true
+          description: Кол-во изображений пользователя, которое нужно получить
+          schema:
+            type: integer
+            example: 10
+            minimum: 1
+        - name: page
+          in: query
+          required: true
+          description: Смещение, с которым нужно получить изображение (записи от (page - 1) * size + 1 до page * size включительно)
+          schema:
+            type: integer
+            example: 2
+            minimum: 1
+      responses:
+        '200':
+          description: Поиск успешен
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsersResponse"
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /user/{userId}/follow:
+    post:
+      tags:
+        - user
+      summary: Подписаться на пользователя
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: id пользователя, на которого нужно подписаться
+          schema:
+            type: integer
+            example: 1
+            minimum: 1
+      responses:
+        '200':
+          description: Подписка успешна
+        '400':
+          description: Некорректный запрос или пользователь уже подписан на другого пользователя
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '401':
+          description: Пользователь неавторизован
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - jwt-token: []
+  /user/{userId}/unfollow:
+    post:
+      tags:
+        - user
+      summary: Отписаться от пользователя
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: id пользователя, от которого нужно отписаться
+          schema:
+            type: integer
+            example: 1
+            minimum: 1
+      responses:
+        '200':
+          description: Отписка успешна
+        '400':
+          description: Некорректный запрос или пользователь не подписан на другого пользователя
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '401':
+          description: Пользователь неавторизован
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - jwt-token: []
+  /proccessing:
+    post:
+      tags:
+        - processing
+      summary: Обработка изображения нейросетью
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/ProcessingImageRequest"
+      responses:
+        '200':
+          description: Изображение успешно обработалось
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProcessingImageResponse"
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '401':
+          description: Пользователь неавторизован
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '402':
+          description: У пользователя не открыт данный стиль
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '415':
+          description: Изображение в неподдерживаемом формате
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '429':
+          description: Достигнут лимит запросов
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - jwt-token: []
+  /style:
+    get:
+      tags:
+        - processing
+      summary: Получить все существующие стили
+      responses:
+        '200':
+          description: Стили успешно получены
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StylesResponse"
+        '401':
+          description: Пользователь неавторизован
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - jwt-token: []
+  /image/save:
+    post:
+      tags:
+        - image
+      summary: Сохранение обработанного изображения на сервере
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/SaveImageRequest"
+      responses:
+        '200':
+          description: Изображение успешно сохранено
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SaveImageResponse"
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '401':
+          description: Пользователь неавторизован
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '415':
+          description: Изображение в неподдерживаемом формате
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - jwt-token: []
+  /image/{uuid}:
+    get:
+      tags:
+        - image
+      summary: Получить данные изображения по uuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: uuid изображения, которое нужно получить
+          schema:
+            type: string
+            example: "743c8075-7d10-4834-8706-78b8fe88b352"
+      responses:
+        '200':
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImageResponse"
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '403':
+          description: Недостаточно прав
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Изображение не найдено
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - {}
+        - jwt-token: []
+    put:
+      tags:
+        - image
+      summary: Обновить уровень доступа к изображению
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: uuid изображения, которое необходимо обновить
+          schema:
+            type: string
+            example: "743c8075-7d10-4834-8706-78b8fe88b352"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateImageRequest"
+      responses:
+        '200':
+          description: Изображение успешно обновлено
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '401':
+          description: Пользователь неавторизован
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '403':
+          description: Недостаточно прав
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Изображение не найдено
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - jwt-token: []
+    delete:
+      tags:
+        - image
+      summary: Удалить сохраненное изображение
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: uuid изображения, которое необходимо удалить
+          schema:
+            type: string
+            example: "743c8075-7d10-4834-8706-78b8fe88b352"
+      responses:
+        '200':
+          description: Изображение успешно удалено
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '401':
+          description: Пользователь неавторизован
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '403':
+          description: Недостаточно прав
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Изображение не найдено
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - jwt-token: []
+  /user/{userId}/images:
+    get:
+      tags:
+        - image
+        - user
+      summary: Получить изображения пользователя
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: id пользователя, у которого надо получить изображения
+          schema:
+            type: integer
+            example: 1
+            minimum: 1
+        - name: size
+          in: query
+          required: true
+          description: Кол-во изображений пользователя, которое нужно получить
+          schema:
+            type: integer
+            example: 10
+            minimum: 1
+        - name: page
+          in: query
+          required: true
+          description: Смещение, с которым нужно получить изображение (записи от (page - 1) * size + 1 до page * size включительно)
+          schema:
+            type: integer
+            example: 2
+            minimum: 1
+        - name: protection
+          in: query
+          required: true
+          description: Изображения с каким уровнем доступа необходимо получить
+          schema:
+            type: string
+            example: "public"
+            enum:
+              - public
+              - private
+      responses:
+        '200':
+          description: Изображения пользователя успешно получены
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetImagesResponse"
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '401':
+          description: Пользователь неавторизован
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '403':
+          description: Нету доступа к приватным изображениям
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Пользователь или его изображения не найдены
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - {}
+        - jwt-token: []
+  /image/{uuid}/like:
+    post:
+      tags:
+        - image
+      summary: Поставить лайк изображению
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: uuid изображения, которое необходимо удалить
+          schema:
+            type: string
+            example: "743c8075-7d10-4834-8706-78b8fe88b352"
+      responses:
+        '200':
+          description: Лайк успешно поставлен
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '401':
+          description: Пользователь неавторизован
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '403':
+          description: Нету доступа к изображению
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Изображение не найдено
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - jwt-token: []
+  /image/{uuid}/comment:
+    post:
+      tags:
+        - image
+        - comment
+      summary: Оставить комментарий к изображению
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: uuid изображения, к которому нужно оставить комментарий
+          schema:
+            type: string
+            example: "743c8075-7d10-4834-8706-78b8fe88b352"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveCommentRequest"
+      responses:
+        '200':
+          description: Комментарий успешно сохранен
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '403':
+          description: Нету доступа к этому изображению
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Изображение не найдено
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - jwt-token: []
+  /image/{uuid}/comments:
+    get:
+      tags:
+        - image
+        - comment
+      summary: Получить комментарии к изображению
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: uuid изображения, комментарии которого надо получить
+          schema:
+            type: string
+            example: "743c8075-7d10-4834-8706-78b8fe88b352"
+        - name: size
+          in: query
+          required: true
+          description: Кол-во комментариев, которое нужно получить
+          schema:
+            type: integer
+            example: 10
+            minimum: 1
+        - name: page
+          in: query
+          required: true
+          description: Смещение, с которым нужно получить комментарии (записи от (page - 1) * size + 1 до page * size включительно)
+          schema:
+            type: integer
+            example: 2
+            minimum: 1
+      responses:
+        '200':
+          description: Комментарии к изображению успешно получены
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCommentsResponse"
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '403':
+          description: Нету доступа к этому изображению
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Изображение или комментарии не найдены
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - {}
+        - jwt-token: []
+  /feed:
+    get:
+      tags:
+        - feed
+      summary: Получить изображения из ленты публикаций
+      parameters:
+        - name: sort
+          in: query
+          required: true
+          description: Сортировка ленты по новым/популярным/подписки
+          schema:
+            type: string
+            enum:
+              - new
+              - popular
+              - follow
+        - name: size
+          in: query
+          required: true
+          description: Кол-во изображений, которое нужно получить
+          schema:
+            type: integer
+            example: 10
+            minimum: 1
+        - name: page
+          in: query
+          required: true
+          description: Смещение, с которым нужно получить изображения (записи от (page - 1) * size + 1 до page * size включительно)
+          schema:
+            type: integer
+            example: 2
+            minimum: 1
+      responses:
+        '200':
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetImagesResponse"
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Подписки не найдены
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - {}
+        - jwt-token: []
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+          example: "-1"
+          description: Код ошибки
+        message:
+          type: string
+          example: "Описание ошибки"
+          description: Описание ошибки
+      required:
+        - errorCode
+        - message
+    RegisterRequest:
+      type: object
+      properties:
+        nickname:
+          type: string
+          example: "admin"
+          description: Никнейм пользователя
+        email:
+          type: string
+          example: "my_mail@email.com"
+          description: Почта пользователя
+        password:
+          type: string
+          example: "myP4ssw0rd"
+          description: Пароль пользователя
+      required:
+        - nickname
+        - password
+    LoginRequest:
+      type: object
+      properties:
+        nickname:
+          type: string
+          example: "admin"
+          description: Никнейм пользователя
+        email:
+          type: string
+          example: "my_mail@email.com"
+          description: Почта пользователя
+        password:
+          type: string
+          example: "myP4ssw0rd"
+          description: Пароль пользователя
+      required:
+        - password
+    AuthResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: id пользователя на сервере
+          minimum: 1
+        token:
+          type: string
+          example: "$2a$10$taxVDg/YdruyrjwaOK2JqeeHKaJVuWN963e98XciQlwpvilR07OTe"
+          description: Jwt-токен пользователя
+        expiresIn:
+          type: integer
+          example: 3600000
+          description: Через сколько мс истечет jwt-токен
+      required:
+        - id
+        - token
+        - expiresIn
+    ProcessingImageRequest:
+      type: object
+      properties:
+        image:
+          type: string
+          format: binary
+          nullable: false
+          description: Изображение, которое необходимо обработать
+        style:
+          type: string
+          example: "сyberpunk"
+          description: Стиль, в который необходимо обработать изображение
+      required:
+        - image
+        - style
+    ProcessingImageResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: "743c8075-7d10-4834-8706-78b8fe88b352"
+          description: uuid запроса на обработку
+      required:
+        - uuid
+    SaveImageRequest:
+      type: object
+      properties:
+        image:
+          type: string
+          format: binary
+          nullable: false
+          description: Изображение, которое необходимо сохранить
+        protection:
+          type: string
+          example: "public"
+          description: Уровень доступа к изображению (публичный или приватный)
+          enum:
+            - public
+            - private
+      required:
+        - image
+        - protection
+    SaveImageResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: "743c8075-7d10-4834-8706-78b8fe88b352"
+          description: UUID сохраненного изображения
+      required:
+        - uuid
+    ImageResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: "743c8075-7d10-4834-8706-78b8fe88b352"
+          description: UUID сохраненного изображения
+        protection:
+          type: string
+          example: "public"
+          description: Уровень доступа к изображению
+          enum:
+            - public
+            - private
+        authorId:
+          type: integer
+          example: 1
+          description: id автора изображения
+          minimum: 1
+        authorNickname:
+          type: string
+          example: "admin"
+          description: Никнейм автора изображения
+        authorAvatarUuid:
+          type: string
+          description: uuid аватарки автора изображения
+          example: "743c8075-7d10-4834-8706-78b8fe88b352"
+        likes:
+          type: integer
+          example: 1000
+          description: Кол-во лайков у фотографии
+      required:
+        - uuid
+    GetImagesResponse:
+      type: object
+      properties:
+        images:
+          type: array
+          items:
+            $ref: "#/components/schemas/ImageResponse"
+          description: Найденные изображения пользователя
+          minItems: 1
+      required:
+        - images
+    UpdateImageRequest:
+      type: object
+      properties:
+        protection:
+          type: string
+          example: "public"
+          description: Новый уровень доступа к изображению (публичный или приватный)
+          enum:
+            - public
+            - private
+      required:
+       - protection
+    SubscriptionResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Название подписки
+          example: "premium"
+        cost_month:
+          type: string
+          description: Стоимость подписки в месяц (в рублях)
+          example: "449.00"
+        cost_year:
+          type: string
+          description: Стоимость подписки при единоразовой покупке на год (в рублях)
+          example: "4499.00"
+        limit:
+          type: integer
+          description: Лимит запросов на обработку в неделю
+          example: 10
+        styles:
+          type: array
+          description: Стили, доступные в этой подписке
+          items:
+            $ref: "#/components/schemas/StyleResponse"
+      required:
+        - name
+        - cost_month
+    UserResponse:
+      type: object
+      properties:
+        userId:
+          type: integer
+          description: id пользователя
+          example: 1
+          minimum: 1
+        nickname:
+          type: string
+          description: Никнейм пользователя
+          example: "admin"
+        email:
+          type: string
+          description: Почта пользователя
+          example: "my_mail@email.com"
+        description:
+          type: string
+          description: Описание пользователя
+          example: "Я крутой"
+        follows:
+          type: integer
+          description: Кол-во других пользователей, на которых подписан пользователь
+          example: 10
+        followers:
+          type: integer
+          description: Кол-во других пользователей, которые подписаны на пользователя
+          example: 11
+        likes:
+          type: integer
+          description: Кол-во лайков у пользователя
+          example: 1000
+        subscription:
+          $ref: "#/components/schemas/SubscriptionResponse"
+        subscriptionEnd:
+          type: string
+          description: До какого дня (включительно) действует подписка
+          example: "06.03.2025"
+        avatarUuid:
+          type: string
+          description: uuid аватарки пользователя
+          example: "743c8075-7d10-4834-8706-78b8fe88b352"
+        isFollow:
+          type: boolean
+          example: true
+          description: Подписан ли на данного пользователя пользователь, который отправил запрос
+      required:
+        - userId
+        - nickname
+    UsersResponse:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserResponse"
+      required:
+        - users
+    UpdateUserRequest:
+      type: object
+      properties:
+        nickname:
+          type: string
+          description: Новый никнейм пользователя
+          example: "admin"
+        email:
+          type: string
+          description: Новая почта пользователя
+          example: "my_mail@email.com"
+        description:
+          type: string
+          description: Новое описание пользователя
+          example: "Я крутой"
+        password:
+          type: string
+          description: Новый пароль пользователя
+          example: "myP4ssw0rd"
+        subscription:
+          type: string
+          description: Новый уровень подписки пользователя (Для ручной корректировки)
+          example: none
+          enum:
+            - none
+            - pro
+            - premium
+            - admin
+        subscriptionEnd:
+          type: string
+          description: До какого дня (включительно) действует новая подписка (Для ручной корректировки)
+          example: "06.03.2025"
+        avatar:
+          type: string
+          format: binary
+          description: Новая аватарка пользователя
+    SaveCommentRequest:
+      type: object
+      properties:
+        comment:
+          type: string
+          description: Комментарий пользователя
+          example: "Фотка огонь"
+      required:
+        - comment
+    CommentResponse:
+      type: object
+      properties:
+        authorId:
+          type: integer
+          description: id пользователя, оставившего комментарий
+          example: 1
+        authorNickname:
+          type: string
+          description: Никнейм пользователя, оставившего комментарий
+          example: "admin"
+        authorAvatarUuid:
+          type: string
+          description: uuid аватарки пользователя, оставившего комментарий
+          example: "743c8075-7d10-4834-8706-78b8fe88b352"
+        commentId:
+          type: integer
+          description: id комментария
+          example: 3
+        comment:
+          type: string
+          description: Комментарий пользователя
+          example: "Фотка огонь"
+        createdAt:
+          type: string
+          description: Время создания комментария
+          example: "06.03.2025 14:25:39"
+      required:
+        - authorId
+        - authorNickname
+        - commentId
+        - comment
+        - createdAt
+    GetCommentsResponse:
+      type: object
+      properties:
+        comments:
+          type: array
+          items:
+            $ref: "#/components/schemas/CommentResponse"
+      required:
+        - comments
+    StyleResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Название стиля
+          example: "Киберпанк"
+        available:
+          type: boolean
+          description: Доступен ли данный стиль пользователю
+          example: true
+        icon:
+          type: string
+          description: uuid иконки для стиля
+          example: "743c8075-7d10-4834-8706-78b8fe88b352"
+      required:
+        - name
+        - available
+        - icon
+    StylesResponse:
+      type: object
+      properties:
+        styles:
+          type: array
+          items:
+            $ref: "#/components/schemas/StyleResponse"
+      required:
+        - styles
+  securitySchemes:
+    jwt-token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT-токен пользователя
