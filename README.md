@@ -14,4 +14,4 @@
 - Презентация ТЗ [pdf](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/TechnicalSpecifications/TechSpecs_presnetation.pdf)  [pptx](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/TechnicalSpecifications/TechSpecs_presnetation.pptx)
 - OpenAPI [yaml](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/OpenAPI/openapi.yaml)
 ### Видео
-- [Защита ТЗ] (https://drive.google.com/file/d/1ZAEx87zdco-ml5oO-SxhZdC1zHx_DL_Q/view?usp=sharing)
+- [Защита ТЗ](https://drive.google.com/file/d/1ZAEx87zdco-ml5oO-SxhZdC1zHx_DL_Q/view?usp=sharing)
