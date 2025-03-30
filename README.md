@@ -11,7 +11,7 @@
 * [Jira](https://id.atlassian.com/invite/p/jira-software?id=_G0OVah0QVq9GGeGqob1SA)
 * [Figma](https://www.figma.com/design/8WzZjcBWFuxjhPgN0SXnbi/Visionary-Login-Screen?node-id=129-313&t=6hd2iUxEWvem2A5I-11)
 ### Документация
-- Техническое задание  [pdf](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/TechnicalSpecifications/TechSpecs.pdf)  [docx](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/TechnicalSpecifications/TechSpecs.docx)
+- Техническое задание  [pdf](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/TechnicalSpecifications/TechSpeccs.pdf)  [docx](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/TechnicalSpecifications/TechSpeccs.docx)
 - Диаграммы
 	- Диаграмма вариантов использования [png](https://github.com/Mixing-Visionary/Docs/tree/docs-deploy/Diagrams/UseCase.png)
 	- Диаграмма активности [png](https://github.com/Mixing-Visionary/Docs/tree/docs-deploy/Diagrams/Activity.png)
