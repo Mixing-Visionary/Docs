@@ -25,3 +25,10 @@
 - Брендбук [pdf](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/BrandBook/BrandBook.pdf)
 ### Видео
 - [Защита ТЗ](https://drive.google.com/file/d/1ZAEx87zdco-ml5oO-SxhZdC1zHx_DL_Q/view?usp=sharing)
+### Проверка других проектов
+- Чеклист [pdf](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/CheckList/Checklist.pdf)
+### Репозитории с проверками нашего проекта
+- [Команда 4.2](https://github.com/I-want-pizza/QWality.git)
+- [Команда 6.1](https://gitlab.usr0.ru/tailoredtastes/tailoredtastes-documentation/)
+- [Команда 6.3](https://github.com/VisualMusic-VSU/visualmusic)
+- [Команда 7.2](https://github.com/orgs/ReflectAppTP)
