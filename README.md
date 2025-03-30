@@ -22,10 +22,6 @@
 	- Сценарии авторизованного пользователя [png](https://github.com/Mixing-Visionary/Docs/tree/docs-deploy/Diagrams/AthorizedUserScenary.png)
 - Презентация ТЗ [pdf](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/TechnicalSpecifications/TechSpecs_presnetation.pdf)  [pptx](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/TechnicalSpecifications/TechSpecs_presnetation.pptx)
 - OpenAPI [yaml](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/OpenAPI/openapi.yaml)
-- Брендбук(https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/BrandBook/BrandBook.pdf)
+- Брендбук [pdf](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/BrandBook/BrandBook.pdf)
 ### Видео
-<<<<<<< HEAD
 - [Защита ТЗ](https://drive.google.com/file/d/1ZAEx87zdco-ml5oO-SxhZdC1zHx_DL_Q/view?usp=sharing)
-=======
-- [Защита ТЗ](https://drive.google.com/file/d/1ZAEx87zdco-ml5oO-SxhZdC1zHx_DL_Q/view?usp=sharing)
->>>>>>> e425918997c27108dbca09cf39f7f786edec8b33
