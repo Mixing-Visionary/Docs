@@ -23,6 +23,7 @@
 - Презентация ТЗ [pdf](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/TechnicalSpecifications/TechSpecs_presnetation.pdf)  [pptx](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/TechnicalSpecifications/TechSpecs_presnetation.pptx)
 - OpenAPI [yaml](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/OpenAPI/openapi.yaml)
 - Брендбук [pdf](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/BrandBook/BrandBook.pdf)
+- Отчёты PM [rep](https://github.com/Mixing-Visionary/Reports)
 ### Видео
 - [Защита ТЗ](https://drive.google.com/file/d/1ZAEx87zdco-ml5oO-SxhZdC1zHx_DL_Q/view?usp=sharing)
 ### Проверка других проектов
