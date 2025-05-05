@@ -20,13 +20,22 @@
 	- Диаграмма состояний [png](https://github.com/Mixing-Visionary/Docs/tree/master/Diagrams/StateChart.png)
 	- Сценарии неавторизованного пользователя [png](https://github.com/Mixing-Visionary/Docs/tree/master/Diagrams/UnathorizedUserScenary.png)
 	- Сценарии авторизованного пользователя [png](https://github.com/Mixing-Visionary/Docs/tree/master/Diagrams/AthorizedUserScenary.png)
-- Презентация ТЗ [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/TechnicalSpecifications/TechSpecs_presnetation.pdf)  [pptx](https://github.com/Mixing-Visionary/Docs/blob/master/TechnicalSpecifications/TechSpecs_presnetation.pptx)
+- Презентация ТЗ [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/Presentation/TechSpecs_presnetation.pdf)  [pptx](https://github.com/Mixing-Visionary/Docs/blob/master/Presentation/TechSpecs_presnetation.pptx)
 - OpenAPI [yaml](https://github.com/Mixing-Visionary/Docs/blob/master/OpenAPI/openapi.yaml)
 - Брендбук [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/BrandBook/BrandBook.pdf)
 - Отчёты PM [rep](https://github.com/Mixing-Visionary/Reports)
 - Отчёты Тестировщика [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/TestsDocumentation/TestsReport.pdf) [docx](https://github.com/Mixing-Visionary/Docs/blob/master/TestsDocumentation/TestsReport.docx)
+- Презентация MVP [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/Presentation/MVP_presentation.pdf) [pptx](https://github.com/Mixing-Visionary/Docs/blob/master/Presentation/MVP_presentation.pptx)
 ### Видео
 - [Защита ТЗ](https://drive.google.com/file/d/1ZAEx87zdco-ml5oO-SxhZdC1zHx_DL_Q/view?usp=sharing)
+- [Защита MVP](https://drive.google.com/file/d/1a1aySghCdFW4c7IcMH3HMoCZBkm1NghW/view?usp=drive_link)
+
+Сценарии:
+- [Неавторизированный пользователь](https://drive.google.com/file/d/1n0in5QhbsOsQaRfCtpZ0jGjWqHvPP4i_/view?usp=sharing)
+- [Регистрация](https://drive.google.com/file/d/1WF4nWsF2mqKLOfjCLsAlRrEnMVZW_LW5/view?usp=sharing)
+- [Редактирование фото](https://drive.google.com/file/d/1UAECkGKGQvSLQDIb7Un3Pq8-lKRA6crF/view?usp=sharing)
+- [Комментирование и просмотр поста](https://drive.google.com/file/d/1jcRGftvdwkSoYKBjjxx-OGa45JHt0yDt/view?usp=sharing)
+- [Просмотр условий подписок](https://drive.google.com/file/d/1vVZHzG30I2RjlfHEs-20p-FWAGOS4o5X/view?usp=sharing)
 ### Проверка других проектов
 - Чеклист [pdf](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/CheckList/Checklist.pdf)
 ### Репозитории с проверками нашего проекта
