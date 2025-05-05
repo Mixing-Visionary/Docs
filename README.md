@@ -29,6 +29,7 @@
 ### Видео
 - [Защита ТЗ](https://drive.google.com/file/d/1ZAEx87zdco-ml5oO-SxhZdC1zHx_DL_Q/view?usp=sharing)
 - [Защита MVP](https://drive.google.com/file/d/1a1aySghCdFW4c7IcMH3HMoCZBkm1NghW/view?usp=drive_link)
+
 Сценарии:
 - [Неавторизированный пользователь](https://drive.google.com/file/d/1n0in5QhbsOsQaRfCtpZ0jGjWqHvPP4i_/view?usp=sharing)
 - [Регистрация](https://drive.google.com/file/d/1WF4nWsF2mqKLOfjCLsAlRrEnMVZW_LW5/view?usp=sharing)
