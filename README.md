@@ -37,7 +37,8 @@
 - [Комментирование и просмотр поста](https://drive.google.com/file/d/1jcRGftvdwkSoYKBjjxx-OGa45JHt0yDt/view?usp=sharing)
 - [Просмотр условий подписок](https://drive.google.com/file/d/1vVZHzG30I2RjlfHEs-20p-FWAGOS4o5X/view?usp=sharing)
 ### Проверка других проектов
-- Чеклист [pdf](https://github.com/Mixing-Visionary/Docs/blob/docs-deploy/CheckList/Checklist.pdf)
+- Чеклист 1 этап [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/CheckList/Checklist.pdf)
+- Чеклист 2 этап [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/CheckList/Checklist_2.pdf)
 ### Репозитории с проверками нашего проекта
 - [Команда 4.2](https://github.com/I-want-pizza/QWality.git)
 - [Команда 6.1](https://gitlab.usr0.ru/tailoredtastes/tailoredtastes-documentation/)
