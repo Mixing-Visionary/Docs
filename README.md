@@ -10,6 +10,8 @@
 ### Сервисы
 * [Jira](https://id.atlassian.com/invite/p/jira-software?id=_G0OVah0QVq9GGeGqob1SA)
 * [Figma](https://www.figma.com/design/8WzZjcBWFuxjhPgN0SXnbi/Visionary-Login-Screen?node-id=129-313&t=6hd2iUxEWvem2A5I-11)
+* [Админ панель](http://145.255.37.90:8000/)
+* [Apk](https://github.com/Mixing-Visionary/Docs/blob/master/Apk/visionary.apk)
 ### Документация
 - Техническое задание  [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/TechnicalSpecifications/TechSpeccs.pdf)  [docx](https://github.com/Mixing-Visionary/Docs/blob/master/TechnicalSpecifications/TechSpeccs.docx)
 - Диаграммы
@@ -26,6 +28,7 @@
 - Отчёты PM [rep](https://github.com/Mixing-Visionary/Reports)
 - Отчёты Тестировщика [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/TestsDocumentation/TestsReport.pdf) [docx](https://github.com/Mixing-Visionary/Docs/blob/master/TestsDocumentation/TestsReport.docx)
 - Презентация MVP [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/Presentation/MVP_presentation.pdf) [pptx](https://github.com/Mixing-Visionary/Docs/blob/master/Presentation/MVP_presentation.pptx)
+- Защита проекта [slides](https://docs.google.com/presentation/d/1Hve4beK2IHU63NwyiLeRfGQbIznVqvcDk23hLaw7PgI/edit?usp=sharing)
 ### Видео
 - [Защита ТЗ](https://drive.google.com/file/d/1ZAEx87zdco-ml5oO-SxhZdC1zHx_DL_Q/view?usp=sharing)
 - [Защита MVP](https://drive.google.com/file/d/1a1aySghCdFW4c7IcMH3HMoCZBkm1NghW/view?usp=drive_link)
