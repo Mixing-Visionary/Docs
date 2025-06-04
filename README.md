@@ -10,6 +10,8 @@
 ### Сервисы
 * [Jira](https://id.atlassian.com/invite/p/jira-software?id=_G0OVah0QVq9GGeGqob1SA)
 * [Figma](https://www.figma.com/design/8WzZjcBWFuxjhPgN0SXnbi/Visionary-Login-Screen?node-id=129-313&t=6hd2iUxEWvem2A5I-11)
+* [Админ панель](http://145.255.37.90:8000/)
+* [Apk](https://github.com/Mixing-Visionary/Docs/blob/master/Apk/visionary.apk)
 ### Документация
 - Техническое задание  [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/TechnicalSpecifications/TechSpeccs.pdf)  [docx](https://github.com/Mixing-Visionary/Docs/blob/master/TechnicalSpecifications/TechSpeccs.docx)
 - Диаграммы
