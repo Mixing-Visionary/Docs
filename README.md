@@ -29,6 +29,7 @@
 - Отчёты Тестировщика [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/TestsDocumentation/TestsReport.pdf) [docx](https://github.com/Mixing-Visionary/Docs/blob/master/TestsDocumentation/TestsReport.docx)
 - Презентация MVP [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/Presentation/MVP_presentation.pdf) [pptx](https://github.com/Mixing-Visionary/Docs/blob/master/Presentation/MVP_presentation.pptx)
 - Защита проекта [slides](https://docs.google.com/presentation/d/1Hve4beK2IHU63NwyiLeRfGQbIznVqvcDk23hLaw7PgI/edit?usp=sharing)
+- Курсовая [docs](https://github.com/Mixing-Visionary/Docs/blob/master/TermPaper/TpCourceTask.docx) [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/TermPaper/TpCourceTask.pdf)
 ### Видео
 - [Защита ТЗ](https://drive.google.com/file/d/1ZAEx87zdco-ml5oO-SxhZdC1zHx_DL_Q/view?usp=sharing)
 - [Защита MVP](https://drive.google.com/file/d/1a1aySghCdFW4c7IcMH3HMoCZBkm1NghW/view?usp=drive_link)
