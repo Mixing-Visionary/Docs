@@ -13,7 +13,8 @@
 * [Админ панель](http://145.255.37.90:8000/)
 * [Apk](https://github.com/Mixing-Visionary/Docs/blob/master/Apk/visionary.apk)
 ### Документация
-- Техническое задание  [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/TechnicalSpecifications/TechSpeccs.pdf)  [docx](https://github.com/Mixing-Visionary/Docs/blob/master/TechnicalSpecifications/TechSpeccs.docx)
+- Техническое задание  [pdf](https://github.com/Mixing-Visionary/Docs/blob/master/TechnicalSpecifications/TechSpeccs_Corrected.pdf)  [docx](https://github.com/Mixing-Visionary/Docs/blob/master/TechnicalSpecifications/TechSpeccs_Corrected.docx)
+- Правки иехнического задания [txt](https://github.com/Mixing-Visionary/Docs/blob/master/TechnicalSpecifications/corrections.txt)
 - Диаграммы
 	- Диаграмма вариантов использования [png](https://github.com/Mixing-Visionary/Docs/tree/master/Diagrams/UseCase.png)
 	- Диаграмма активности [png](https://github.com/Mixing-Visionary/Docs/tree/master/Diagrams/Activity.png)
